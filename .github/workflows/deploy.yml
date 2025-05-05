@@ -13,6 +13,12 @@ jobs:
     - name: Checkout do codigo
       uses: actions/checkout@v4
     
+
+    - name: Testar conexão SSH com netcat
+      run: |
+        echo "Testando conexão com porta 22..."
+        nc -zv -w 5 ${{ secrets.SERVER_HOST }} 22 || echo " Falha na conexão com a porta 22 (SSH não acessível)"
+
     - name: Conectar com a VM e fazer o deploy
       uses: appleboy/ssh-action@v0.1.8
 
